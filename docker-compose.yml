@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: api-test
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/testdb
+    depends_on:
+      - mongo
+    networks:
+      - netTest
+
+  mongo:
+    image: mongo:6
+    container_name: mongo-test
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - netTest
+
+networks:
+  netTest:
+    driver: bridge
+
+volumes:
+  mongo_data:
