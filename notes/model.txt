@@ -1,0 +1,16 @@
+Un modelo en Mongoose es una clase creada a partir de un schema, que representa una colección en MongoDB. 
+El modelo contiene métodos para interactuar con la base de datos: crear, buscar, actualizar, eliminar, etc.
+
+
+ ¿Para qué se usa?
+Para persistir datos en MongoDB.
+
+Para aplicar validaciones y tipos en tiempo de ejecución.
+
+Tiene métodos como .find(), .create(), .findById(), etc.
+
+
+const BrandModel = model("brand", BrandSchema);
+export default BrandModel;
+
+Esto crea el modelo BrandModel que opera sobre la colección "brand" en MongoDB.

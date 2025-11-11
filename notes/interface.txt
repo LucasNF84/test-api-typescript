@@ -1,0 +1,11 @@
+La interface (Brand) se usa para tipar objetos en TypeScript (en tiempo de desarrollo).
+
+
+Una interface en TypeScript define la forma (shape) de un objeto: qué propiedades tiene, de qué tipo son, y si son opcionales o requeridas.
+
+📌 ¿Para qué se usa?
+Para dar tipado estático en tiempo de desarrollo.
+
+Para que TypeScript te ayude con autocompletado y validaciones.
+
+No existe en tiempo de ejecución, es solo para el desarrollador.

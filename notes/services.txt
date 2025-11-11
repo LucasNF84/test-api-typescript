@@ -1,0 +1,42 @@
+Los servicios son responsables de:
+
+Encapsular la lógica de negocio.
+
+Realizar las operaciones sobre la base de datos (usualmente con modelos como Mongoose en MongoDB).
+
+Devolver los resultados al controlador.
+
+Mantener el código reutilizable y desacoplado del contexto HTTP.
+
+Este servicio encapsula la lógica de búsqueda de un Brand en la base de datos, pero no sabe nada del Request ni del Response.
+
+
+ Ejemplos de lógica de negocio
+Supongamos que estás trabajando en un sistema de marcas (brands) como en tu código. Algunas posibles reglas de negocio podrían ser:
+
+🎯 Ejemplo 1: Validación personalizada
+“Una marca no puede crearse si ya existe otra con el mismo nombre (case-insensitive)”.
+
+Esa lógica no es del framework, ni de la base de datos: es una regla del dominio. Se implementa normalmente en un servicio antes de llamar a .save() o .create().
+
+🎯 Ejemplo 2: Transformación
+“El nombre de la marca siempre debe guardarse en mayúsculas”.
+
+Eso también es parte de la lógica de negocio. Técnicamente podrías guardar el texto como venga, pero la regla del negocio te dice cómo hacerlo correctamente.
+
+🎯 Ejemplo 3: Reglas compuestas
+“Solo se puede actualizar una marca si fue creada por el usuario autenticado que la registró”.
+
+Eso implica verificar permisos, autoría, y aplicar la lógica de autorización antes de actualizar.
+
+// Lógica de negocio en el servicio
+const insertBrand = async (item: Brand) => {
+  const alreadyExists = await BrandModel.findOne({ name: item.name.toUpperCase() });
+  if (alreadyExists) {
+    throw new Error("Brand already exists");
+  }
+
+  item.name = item.name.toUpperCase(); // normalización (regla de negocio)
+  const responseInsert = await BrandModel.create(item);
+  return responseInsert;
+};

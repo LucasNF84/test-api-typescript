@@ -1,0 +1,8 @@
+Los "Controladores" son responsables de:
+
+Recibir la solicitud del cliente (Request).
+Validar y extraer parámetros necesarios (por ejemplo params, body, query).
+Llamar al "servicio" correspondiente, pasando los datos necesarios.
+Enviar la respuesta al cliente (Response).
+Manejar errores de forma centralizada.
+Este controlador simplemente se encarga de orquestar la solicitud, pero no implementa ninguna "lógica de negocio" directamente.La "lógica de negocio" se hace en services
