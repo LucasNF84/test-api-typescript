@@ -1,4 +1,3 @@
-import { Car } from "../interfaces/item.interface";
 import ItemModel from "../models/item";
 
 const getOrders = async () => {

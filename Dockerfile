@@ -1,19 +1,17 @@
-FROM node:20-alpine
+FROM node:18
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
-# Copiamos los archivos de dependencias
-COPY package*.json ./
-
-# Instalamos dependencias (incluye devDependencies)
+COPY package*.json tsconfig.json ./
 RUN npm install
+RUN npm install -g typescript
 
-# Copiamos el resto del código fuente
-COPY . .
+# Copiar solo el código fuente
+COPY src ./src
 
-# Exponemos el puerto de la API
+# Compilar el TypeScript
+RUN tsc
+
 EXPOSE 3000
+CMD ["node", "dist/app.js"]
 
-# Comando por defecto: correr en modo desarrollo
-CMD ["npm", "run", "dev"]

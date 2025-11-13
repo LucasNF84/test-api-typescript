@@ -6,12 +6,12 @@ services:
     container_name: api-test
     ports:
       - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - PORT=3000
-      - MONGO_URI=mongodb://mongo:27017/testdb
+# volumes:
+#   - .:/usr/src/app
+#   - /usr/src/app/node_modules
+
+    env_file:
+      - .env          # <--- usa las variables del archivo .env
     depends_on:
       - mongo
     networks:
@@ -34,3 +34,4 @@ networks:
 
 volumes:
   mongo_data:
+
